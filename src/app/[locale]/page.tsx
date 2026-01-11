@@ -6,13 +6,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/src/components/ui/card"
 import Image from "next/image";
 import {
   Header,
   HeaderLogo,
   HeaderLangs,
-} from "@/components/Header"
+} from "@/src/components/Header"
 
 export default function Home() {
   return (
@@ -28,15 +28,8 @@ export default function Home() {
               height={16}
             />
           </HeaderLogo>
-          <HeaderLangs>En | FR</HeaderLangs>
+          <HeaderLangs />
         </Header>
-         <Image
-          src="https://images.pexels.com/photos/210893/pexels-photo-210893.jpeg"
-          alt="cycling"
-          width={480}
-          height={360}
-          priority
-        />
         <div className="flex justify-start w-full my-6">
           <Card className="min-w-60">
             <CardHeader>

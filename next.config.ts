@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   images: {
@@ -13,4 +14,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
+
+// So like wrapping all the config wih the nextIntlPlugin - not sure 
+// how this works but this how it's setup
+export default withNextIntl(nextConfig);

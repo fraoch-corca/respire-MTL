@@ -1,0 +1,8 @@
+{
+    "common": {
+        "appName": "Respire MTL",
+        "loading": "Chargement...",
+        "error": "Une erreur est survenue",
+        "welcome": "Bienvenue"
+    }
+}

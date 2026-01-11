@@ -2,6 +2,8 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+import { LanguageSwitcher } from "./Language-Switcher";
+
 function Header({ className, ...props }: React.ComponentProps<"header">) {
   return (
     <header
@@ -33,7 +35,9 @@ function HeaderLangs({className, ...props }: React.ComponentProps<"div">) {
                 className
             )}
             {...props}
-        />      
+        >
+          <LanguageSwitcher/>
+        </div>    
     )
 }
 
