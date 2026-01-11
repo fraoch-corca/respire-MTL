@@ -7,7 +7,7 @@ export default function Hero() {
     return (
         <NextIntlClientProvider>
             <div>
-                <h1>{t('appName')} - {t('welcome')}</h1>
+                <h1>{t('common.appName')} - {t('common.welcome')}</h1>
                 <Image
                     src="https://images.pexels.com/photos/210893/pexels-photo-210893.jpeg"
                     alt="cycling"

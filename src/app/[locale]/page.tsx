@@ -13,6 +13,7 @@ import {
   HeaderLogo,
   HeaderLangs,
 } from "@/src/components/Header"
+import Hero from "@/src/components/Hero";
 
 export default function Home() {
   return (
@@ -30,6 +31,7 @@ export default function Home() {
           </HeaderLogo>
           <HeaderLangs />
         </Header>
+        <Hero />
         <div className="flex justify-start w-full my-6">
           <Card className="min-w-60">
             <CardHeader>

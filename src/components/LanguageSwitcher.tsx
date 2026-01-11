@@ -16,7 +16,7 @@ export function LanguageSwitcher () {
     return (
         <NextIntlClientProvider locale={locale}>
             <div className="flex gap-2">
-    =           <button
+               <button
                     onClick={() => switchLocale('en')}
                     className={locale === 'en' ? 'font-bold' : 'opacity-80'}
                 >
@@ -33,38 +33,3 @@ export function LanguageSwitcher () {
         </NextIntlClientProvider>
     )
 }
-
-
-
-// import * as React from "react";
-// import { cn } from "@/lib/utils"
-
-// function LanguageSwitcher({className, ...props}: React.ComponentProps<"langSwitcher">) {
-//     // get current lang
-//     const selectedClasses = "selected font-bold";
-//     cons currentLang = "en";
-//     const enClass = currentLang == 'en' ? selectedClasses : '';
-//     const frClass = currentLang == 'fr' ? selectedClasses : '';
-    
-//     return(
-//         <div
-//             data-slot="language-switcher"
-//             className={cn(
-//                 "flex justify-between align-middl"
-//             )}
-//             {...props}
-//             >
-//                 <span 
-//                     className="en {enClass}"
-//                 >En</span>
-//                  | 
-//                 <span 
-//                     className="fr {frClass}"
-//                 >Fr</span>
-//             </div>
-//     )
-// }
-
-// export {
-//     LanguageSwitcher
-// }

@@ -8,10 +8,6 @@ export default getRequestConfig(async ({requestLocale}) => {
     ? requested
     : routing.defaultLocale;
   
-  // Load from filesystem
-  // note here how using the variable in pathname 
-  // in video says 'since this is a JSON module, need to use the default 
-  // property to access the actualy JSON value of the file.
   const messages = (await import(`../../messages/${locale}.json`)).default;
 
   return {

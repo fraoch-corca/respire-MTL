@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-import { LanguageSwitcher } from "./Language-Switcher";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 function Header({ className, ...props }: React.ComponentProps<"header">) {
   return (
