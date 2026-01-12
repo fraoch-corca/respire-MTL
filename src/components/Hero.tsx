@@ -1,4 +1,6 @@
 import Image from "next/image";
+import AQIPage from "../app/aqi/page";
+
 import { NextIntlClientProvider, useTranslations } from "next-intl";
 
 export default function Hero() {
@@ -14,7 +16,8 @@ export default function Hero() {
                     width={480}
                     height={360}
                     priority
-                />  
+                /> 
+                <AQIPage /> 
             </div>
         </NextIntlClientProvider>
     )
