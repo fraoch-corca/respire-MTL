@@ -31,7 +31,7 @@ function HeaderLangs({className, ...props }: React.ComponentProps<"div">) {
         <div
             data-slot="header-langs"
             className={cn(
-                "bg-emerald-300 flex content-center justify-center flex-wrap min-w-10",
+                "flex content-center justify-center flex-wrap min-w-10",
                 className
             )}
             {...props}

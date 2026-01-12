@@ -7,25 +7,29 @@ export function LanguageSwitcher () {
     const locale = useLocale();
     const router = useRouter();
     const pathname = usePathname();
-
+    const active = 'capitalize font-bold';
+    const inactive = 'capitalize opacity-80 cursor-pointer hover:rotate-10 focus:rotate-10';
+    
     const switchLocale = (newLocale: string) => {
         const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
         router.push(newPath);
     };
+
+    const setActiveState = (checkLocale: string) => checkLocale === locale ? active : inactive;
 
     return (
         <NextIntlClientProvider locale={locale}>
             <div className="flex gap-2">
                <button
                     onClick={() => switchLocale('en')}
-                    className={locale === 'en' ? 'font-bold' : 'opacity-80'}
+                    className={setActiveState('en')}
                 >
                     En
                 </button>
                 <span> | </span>
                 <button
                     onClick={() => switchLocale('fr')}
-                    className={locale === 'fr' ? 'font-bold' : 'opacity-80'}
+                    className={setActiveState('fr')}
                 >
                     Fr
                 </button>
