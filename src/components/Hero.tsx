@@ -1,5 +1,6 @@
 import Image from "next/image";
 import AQIPage from "../app/aqi/page";
+import WeatherPage from "../app/weather/page";
 
 import { NextIntlClientProvider, useTranslations } from "next-intl";
 
@@ -18,6 +19,7 @@ export default function Hero() {
                     priority
                 /> 
                 <AQIPage /> 
+                <WeatherPage /> 
             </div>
         </NextIntlClientProvider>
     )
