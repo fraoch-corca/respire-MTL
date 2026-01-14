@@ -1,3 +1,4 @@
+import { getLocale } from "next-intl/server";
 import NodeCache from 'node-cache';
 
 interface Weather {
@@ -61,7 +62,9 @@ async function fetchWeatherData(): Promise<Conditions> {
         return cachedData;
     }
 
-    const response = await fetch(WEATHER_API);
+    const locale = await getLocale();
+    const api = locale === 'fr' ? `${WEATHER_API}&lang=fr` : WEATHER_API;
+    const response = await fetch(api);
 
     if (!response.ok) {
         throw new Error('Weather request failed');
@@ -93,6 +96,7 @@ async function fetchWeatherData(): Promise<Conditions> {
 }
 
 export default async function WeatherPage() {
+
     const data = await fetchWeatherData();
 
     return ( 
