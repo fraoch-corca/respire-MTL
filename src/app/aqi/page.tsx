@@ -18,6 +18,7 @@ const aqiCache = new NodeCache();
 
 async function fetchAirQualityData(): Promise<number> {
     const cachedData = aqiCache.get<number>("aqiValue");
+    
     if (cachedData) {
         console.log('Found AQI cache, ', cachedData);
         return cachedData;
@@ -31,11 +32,10 @@ async function fetchAirQualityData(): Promise<number> {
 
     const data: AirQualityResponse = await response.json();
 
-    console.log('les data sont ', data);
-
     const aqi = data.list[0]?.main.aqi;
 
     aqiCache.set("aqiValue", aqi, 3600);
+    
     return aqi;
 }
 

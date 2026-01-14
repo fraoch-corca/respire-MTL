@@ -1,4 +1,4 @@
-// import NodeCache from 'node-cache';
+import NodeCache from 'node-cache';
 
 interface Weather {
     main: string;
@@ -24,8 +24,10 @@ interface Conditions {
 
 const WEATHER_API = "https://api.openweathermap.org/data/2.5/weather?lat=45.5088&lon=-73.5878&appid=b98e39bbfd36a8436269e3a3a112e989";
 const WEATHER_PROPERTIES = ['main', 'description'];
-const WIND_PROPERTIES = ['gust', 'deg', 'speed'];
 const MAIN_PROPERTIES = ['temp', 'humidity'];
+const WIND_PROPERTIES = ['gust', 'deg', 'speed'];
+
+const weatherCache = new NodeCache();
 
 function validateData (data: Conditions) {
     if (!data.weather || !Array.isArray(data.weather) || !data.weather.length) {
@@ -52,6 +54,13 @@ function validateData (data: Conditions) {
 }
 
 async function fetchWeatherData(): Promise<Conditions> {
+    const cachedData = weatherCache.get<Conditions>("cachedWeatherData");
+   
+    if (cachedData) {
+        console.log('weatherDataCache found', cachedData);
+        return cachedData;
+    }
+
     const response = await fetch(WEATHER_API);
 
     if (!response.ok) {
@@ -62,8 +71,7 @@ async function fetchWeatherData(): Promise<Conditions> {
 
     validateData(data);
 
-    // Extract required properties, return as per Conditions interface
-    return {
+    const weatherData = {
         weather: data.weather.map((w: Weather) => ({
             main: w.main,
             description: w.description,
@@ -78,16 +86,18 @@ async function fetchWeatherData(): Promise<Conditions> {
             humidity: data.main.humidity,
         },
     };
+
+    weatherCache.set("cachedWeatherData", weatherData, 3600);
+
+    return weatherData;
 }
 
 export default async function WeatherPage() {
-    const weather = await fetchWeatherData();
-
-    console.log('weather data ', weather);
+    const data = await fetchWeatherData();
 
     return ( 
         <p>
-            Weather data here
+            Weather: {data.weather[0].description}
         </p>
     )
 }
