@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  logging: { 
+    fetches: {
+      fullUrl: true, // shows if fetched from cached data or fresh API hit
+    }
+  }
 };
 
 const withNextIntl = createNextIntlPlugin();

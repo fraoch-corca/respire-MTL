@@ -9,7 +9,7 @@ interface Weather {
 interface Wind {
     speed: number;
     deg: number;
-    gust: number
+    gust?: number;
 }
 
 interface Main {
@@ -26,9 +26,9 @@ interface Conditions {
 const WEATHER_API = "https://api.openweathermap.org/data/2.5/weather?lat=45.5088&lon=-73.5878&appid=b98e39bbfd36a8436269e3a3a112e989";
 const WEATHER_PROPERTIES = ['main', 'description'];
 const MAIN_PROPERTIES = ['temp', 'humidity'];
-const WIND_PROPERTIES = ['gust', 'deg', 'speed'];
+const WIND_PROPERTIES = ['deg', 'speed']; // gust isn't always in the request payload
 
-const weatherCache = new NodeCache();
+// const weatherCache = new NodeCache();
 
 function validateData (data: Conditions) {
     if (!data.weather || !Array.isArray(data.weather) || !data.weather.length) {
@@ -55,16 +55,11 @@ function validateData (data: Conditions) {
 }
 
 async function fetchWeatherData(): Promise<Conditions> {
-    const cachedData = weatherCache.get<Conditions>("cachedWeatherData");
-   
-    if (cachedData) {
-        console.log('weatherDataCache found', cachedData);
-        return cachedData;
-    }
+    // should check here for fetched data?
 
     const locale = await getLocale();
     const api = locale === 'fr' ? `${WEATHER_API}&lang=fr` : WEATHER_API;
-    const response = await fetch(api);
+    const response = await fetch(api, { next: { revalidate: 3600 }});
 
     if (!response.ok) {
         throw new Error('Weather request failed');
@@ -89,8 +84,6 @@ async function fetchWeatherData(): Promise<Conditions> {
             humidity: data.main.humidity,
         },
     };
-
-    weatherCache.set("cachedWeatherData", weatherData, 3600);
 
     return weatherData;
 }
