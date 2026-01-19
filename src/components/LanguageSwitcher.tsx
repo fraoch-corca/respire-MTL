@@ -12,6 +12,8 @@ export function LanguageSwitcher () {
     
     const switchLocale = (newLocale: string) => {
         const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
+
+        console.log('/////////////// change route LS //////////////');
         router.push(newPath);
     };
 

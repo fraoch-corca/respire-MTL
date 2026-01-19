@@ -1,5 +1,4 @@
 import { getLocale } from "next-intl/server";
-import NodeCache from 'node-cache';
 
 interface Weather {
     main: string;
@@ -28,8 +27,6 @@ const WEATHER_PROPERTIES = ['main', 'description'];
 const MAIN_PROPERTIES = ['temp', 'humidity'];
 const WIND_PROPERTIES = ['deg', 'speed']; // gust isn't always in the request payload
 
-// const weatherCache = new NodeCache();
-
 function validateData (data: Conditions) {
     if (!data.weather || !Array.isArray(data.weather) || !data.weather.length) {
         throw new Error('data Weather does not conform to Conditions interface');
@@ -55,8 +52,6 @@ function validateData (data: Conditions) {
 }
 
 async function fetchWeatherData(): Promise<Conditions> {
-    // should check here for fetched data?
-
     const locale = await getLocale();
     const api = locale === 'fr' ? `${WEATHER_API}&lang=fr` : WEATHER_API;
     const response = await fetch(api, { next: { revalidate: 3600 }});

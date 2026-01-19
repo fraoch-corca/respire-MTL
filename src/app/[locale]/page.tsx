@@ -14,8 +14,16 @@ import {
   HeaderLangs,
 } from "@/src/components/Header"
 import Hero from "@/src/components/Hero";
+import BixiStationPage from "../bixi/page";
+import { GeoLocation } from "@/src/components/GeoLocation";
 
-export default function Home() {
+export default async function Home({
+    searchParams,
+}: PageProps<'/[locale]'>) {
+    const params = await searchParams;
+    const longitude = params?.long;
+    const latitude = params?.lat;
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between p-2 bg-orange-100 dark:bg-black sm:items-start">
@@ -31,7 +39,9 @@ export default function Home() {
           </HeaderLogo>
           <HeaderLangs />
         </Header>
+        <GeoLocation />
         <Hero />
+        <BixiStationPage latitude={latitude} longitude={longitude} />
         <div className="flex justify-start w-full my-6">
           <Card className="min-w-60">
             <CardHeader>
